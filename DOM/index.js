@@ -1,3 +1,5 @@
+const $commentForm = document.querySelector("#commentInputContainer");
+const $commentInput = document.querySelector("#commentInput");
 const $commentList = document.querySelector('#commentsList');
 
 const commentItemTemplate = (newComment) => { 
@@ -28,6 +30,18 @@ const commentItemTemplate = (newComment) => {
 }
 
 
-const newComment = commentItemTemplate('대박!!!!!!');
+// const newComment = commentItemTemplate('대박!!!!!!');
 
-$commentList.insertAdjacentHTML('afterbegin', newComment);
+// $commentList.insertAdjacentHTML('afterbegin', newComment);
+
+$commentForm.addEventListener('submit', handleSubmit);
+
+function handleSubmit(event){
+	event.preventDefault();
+	const newComment = $commentInput.value;
+
+	if(!newComment){return};
+	const newCommentItem = commentItemTemplate(newComment);
+	$commentList.insertAdjacentHTML('afterbegin', newCommentItem)
+	$commentInput.value = "";
+}
